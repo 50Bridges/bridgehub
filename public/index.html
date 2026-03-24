@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Risk Match</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <style>
+    body.blurred > *:not(#passwordOverlay) {
+      filter: blur(5px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #passwordOverlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #passwordBox {
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+
+    #passwordBox input {
+      width: 200px;
+      padding: 0.5em;
+      margin-bottom: 1em;
+    }
+
+    #passwordBox button {
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Risk Match</h1>
+
+  <!-- 🔒 Password Modal -->
+  <div id="passwordOverlay">
+    <div id="passwordBox">
+      <h2>Enter Access Code</h2>
+      <input type="password" id="passwordInput" placeholder="Access Code" />
+      <br />
+      <button id="passwordSubmit" type="button">Enter</button>
+      <p id="passwordError" style="color: red; display: none;">Code is incorrect</p>
+    </div>
+  </div>
+  
+  <div class="search-bar">
+  <div class="company-search">
+    <label for="companySearch">Search Carrier</label>
+    <input type="text" id="companySearch" placeholder="Enter at least 3 characters" />
+  </div>
+
+  <div class="wholesaler-search">
+    <label for="wholesalerSearch">Search Wholesaler</label>
+    <input type="text" id="wholesalerSearch" placeholder="Enter at least 3 characters" />
+  </div>
+</div>
+
+
+  <!-- Filters (Built by app.js) -->
+  <div id="filters"></div>
+
+  <!-- Power Units, Unlimited Radius & Min Years In Business -->
+  <div class="filter-row">
+    <div class="filter-power">
+      <label for="powerUnitsInput">Power Units</label>
+      <input type="number" id="powerUnitsInput" placeholder="Enter units" min="0"/>
+    </div>
+    <div class="unlimited-field">
+      <label for="unlimitedCheckbox">Unlimited Radius</label>
+      <input type="checkbox" id="unlimitedCheckbox"/>
+    </div>
+    <div class="filter-years">
+      <label for="yearsInput">Years In Business</label>
+      <input type="number" id="yearsInput" placeholder="Enter years" min="0"/>
+    </div>
+     <span style="color: white;">⚠️ Please review the guidelines before submitting New Venture!</span>
+  </div>
+
+  <!-- ⚠️ Warning & Control Buttons -->
+  </div>
+
+  <!-- Reset Button -->
+  <button id="resetBtn">Reset Filters</button>
+  <button id="printBtn">Save Results</button>
+
+  <!-- Results Table -->
+  <div class="table-container">
+    <table id="resultsTable"></table>
+    <p id="no-results-message" style="display:none;">No results to display</p>
+  </div>
+
+  <!-- Modal for Guidelines -->
+  <div id="guidelineModal" class="modal">
+    <div class="modal-content">
+      <span id="modalClose" class="modal-close">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
