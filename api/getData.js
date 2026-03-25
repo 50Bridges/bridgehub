@@ -3,7 +3,7 @@ import { google } from 'googleapis';
 export default async function handler(req, res) {
   try {
     // ✅ Use unified env variable name
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS);
 
     const auth = new google.auth.GoogleAuth({
       credentials,

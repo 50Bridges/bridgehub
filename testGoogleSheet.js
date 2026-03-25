@@ -4,7 +4,7 @@ const { google } = require('googleapis');
 async function fetchAll() {
   try {
     // ✅ UPDATED: Use env variable instead of keyFile
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS);
 
     const auth = new google.auth.GoogleAuth({
       credentials,
