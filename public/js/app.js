@@ -32,15 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndRender() {
   let raw;
+
   try {
-    // ✅ UPDATED: prevent caching issues on Vercel
     raw = await (await fetch('/api/getData', { cache: 'no-store' })).json();
+
+    // ✅ handle both API formats
+    if (raw.values) {
+      raw = raw.values;
+    }
+
+    if (!Array.isArray(raw) || raw.length < 2) {
+      console.error('❌ Invalid data format:', raw);
+      return;
+    }
+
   } catch (e) {
     console.error('❌ Failed to fetch data', e);
     return;
   }
-
-  if (!Array.isArray(raw) || raw.length < 2) return;
 
   const headerRaw = raw[0].map(h => String(h).trim());
   const headerKey = headerRaw.map(h => h.toLowerCase());
