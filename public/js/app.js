@@ -362,23 +362,46 @@ async function loadAndRender() {
       tr.appendChild(selTd);
 
       displayCols.forEach(col => {
-        const td = document.createElement('td');
-        const cell = (r[col.idx] || '').trim();
+  const td = document.createElement('td');
+  const cell = (r[col.idx] || '').trim();
 
-        if (col.type === 'guideline') {
-          td.innerHTML = `<button class="view-btn">📄</button>`;
-          td.firstChild.onclick = e => {
-            e.stopPropagation();
-            showModal('Submission Guideline', cell.split('--').join('<br>'));
-          };
-        } else if (col.idx === idx.pdfLink && cell) {
-          td.innerHTML = `<a href="${cell}" target="_blank">📄</a>`;
-        } else {
-          td.textContent = cell;
-        }
+  const headerName = headerRaw[col.idx]?.toLowerCase();
 
-        tr.appendChild(td);
-      });
+  // ✅ GUIDELINE (existing)
+  if (col.type === 'guideline') {
+    td.innerHTML = `<button class="view-btn">📄</button>`;
+    td.firstChild.onclick = e => {
+      e.stopPropagation();
+      showModal('Submission Guideline', cell.split('--').join('<br>'));
+    };
+
+  // ✅ STATES → 🇺🇸
+  } else if (headerName.includes('state')) {
+    td.innerHTML = `<button class="view-btn">🇺🇸</button>`;
+    td.firstChild.onclick = e => {
+      e.stopPropagation();
+      showModal('States', cell.split(',').map(s => s.trim()).join('<br>'));
+    };
+
+  // ✅ BUSINESS TYPE → 🚚
+  } else if (headerName.includes('business type')) {
+    td.innerHTML = `<button class="view-btn">🚚</button>`;
+    td.firstChild.onclick = e => {
+      e.stopPropagation();
+      showModal('Business Types', cell.split(',').map(s => s.trim()).join('<br>'));
+    };
+
+  // ✅ URL (existing)
+  } else if (col.idx === idx.pdfLink && cell) {
+    td.innerHTML = `<a href="${cell}" target="_blank">📄</a>`;
+
+  // ✅ DEFAULT
+  } else {
+    td.textContent = cell;
+  }
+
+  tr.appendChild(td);
+});
 
       table.appendChild(tr);
     });
