@@ -17,7 +17,7 @@ async function fetchAll() {
     const sheets = google.sheets({ version: 'v4', auth: client });
 
     // ✅ UPDATED: New Google Sheet ID
-    const spreadsheetId = '1rqtmUhIxZiisR_3SHtlPjyPWH95upyyt';
+    const spreadsheetId = '1skOm729OHp8jCWENGCgHFevQQXXyZmKWRWOYEJ1qu0k';
 
     // ⚠️ Preserved range exactly
     const range = 'Sheet1!A:P';
