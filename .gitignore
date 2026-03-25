@@ -35,6 +35,3 @@ Thumbs.db
 
 # Optional: OS-specific
 *.swp
-config/googleSheetsConfig.js
-server.js
-routes/apiRoutes.js
